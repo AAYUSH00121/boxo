@@ -7,6 +7,10 @@ const body = await response.json();
 return body;
 }
 
-export const movieApi =  (query)=> (
+export const movieShowApi =  (query)=> (
    movieData(`/search/shows?q=${query}`)
+)
+
+export const moviePeopleApi =  (query)=> (
+   movieData(`/search/people?q=${query}`)
 )
