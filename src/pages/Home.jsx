@@ -1,33 +1,32 @@
 import  { useState } from 'react'
 import { movieShowApi, moviePeopleApi } from "../api/Mazeapi"
+import SearchForm from '../components/SearchForm'
+import ShowGrid from '../components/Show/ShowGrid'
+import ActorGrid from '../components/Actor/ActorGrid'
+
+
+
 function Home() {
-    const [changeStr, setChangeStr] = useState("")
+   
     const [apiData, setApiData] = useState(null)
     const [apiDataError, setApiDataError] = useState(null)
-    const [optionChange, setOptionChange] = useState("show")
+   
 
-    const onOptionChange = (ev)=>{
-        return setOptionChange(ev.target.value)
-    }
+    
 
-    const strChange = (ev)=>{
-       setChangeStr(ev.target.value)
+
+    const onSearch = async function({q, optionChange}){
        
-    }
-
-
-    const onSearch = async function(ev){
-        ev.preventDefault()
         
         try {
             if(optionChange === "shows"){
                 setApiDataError(null)
-            const result = await movieShowApi(changeStr)
+            const result = await movieShowApi(q)
             setApiData(result);
             }
             else{
                 setApiDataError(null)
-            const result = await moviePeopleApi(changeStr)
+            const result = await moviePeopleApi(q)
             setApiData(result);
             }
             
@@ -40,40 +39,24 @@ function Home() {
         if(apiDataError){
             return <div>Error occured: {apiDataError.message}</div>
         }
+        if(apiData?.length === 0){
+            return <div>No result found</div>
+        }
         if(apiData){
         return apiData[0].show 
-            ? apiData.map((data)=>
-              <div key={data.show.id}>{data.show.name}</div>)
-            : apiData.map((data)=>
-               <div key={data.person.id}>{data.person.name}</div>)
+            ? <ShowGrid show={apiData}/>
+            : <ActorGrid actor ={apiData} />
         }
         return null;     
     }
   return (
     <div>
-        <form onSubmit={onSearch}>
-            <input type='text' value={changeStr} onChange={strChange}/>
-            <label>
-                Shows
-                <input 
-                type='radio' 
-                value="shows" 
-                checked={optionChange === "shows"} 
-                onChange={onOptionChange}/>
-            </label>
-            <label>
-                Actors
-                <input 
-                type='radio' 
-                value="actor" 
-                checked={optionChange === "actor"} 
-                onChange={onOptionChange}/>
-            </label>
-            <button type='submit'>Search</button>
-        </form>
+        <SearchForm onSearch={onSearch}/>
+
         <div>
-            {onrender()}
-        </div>
+        {onrender()}
+    </div>
+       
     </div>
   )
 }
