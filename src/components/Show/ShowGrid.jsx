@@ -10,7 +10,7 @@ function ShowGrid({show}){
               id={data.show.id}
               name={data.show.name} 
               image = {data.show.image? data.show.image.medium: "/not-found-image.png"}
-              summary = {data.show.summary}
+              summary = {data.show.summary? data.show.summary: "Not found"}
             />)}
        </div>  
     )

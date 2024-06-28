@@ -8,9 +8,9 @@ const ShowCard = ({name,image,id,summary}) => {
                 <img src={image}/>
             </div>
             <h1>{name}</h1>
-            <p>{summaryStripped}</p>
+            <p>{summaryStripped }</p>
             <div>
-              <Link to="/">Read more</Link>
+              <Link to={`/show/${id}`}>Read more</Link>
               <button type="button">Star me</button>
             </div>
         </div>

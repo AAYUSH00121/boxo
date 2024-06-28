@@ -14,3 +14,7 @@ export const movieShowApi =  (query)=> (
 export const moviePeopleApi =  (query)=> (
    movieData(`/search/people?q=${query}`)
 )
+
+export const showDataId =  (showId)=> (
+   movieData(`/shows/${showId}?embed[]=seasons&embed[]=cast`)
+)
