@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { showDataId } from "../api/Mazeapi";
 import {useQuery,} from '@tanstack/react-query'
@@ -6,6 +6,7 @@ import ShowMainData from "../components/Show/ShowMainData";
 import Details from "../components/Show/Details";
 import Seasons from "../components/Show/Seasons";
 import Cast from "../components/Show/Cast";
+
 // This is the code to fetch data from the api and also warping it under custom hook called useShowById
 // const useShowById= (showId)=>{
 //     const [showData, setShowData] = useState(null)
@@ -38,6 +39,8 @@ const Show = ()=>{
       if(showData){
         return(
             <div>
+                <Link to="/">Go to Homepage</Link>
+
                 <ShowMainData 
                 image = {showData.image} 
                 rating = {showData.rating} 
