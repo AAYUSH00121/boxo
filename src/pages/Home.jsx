@@ -11,10 +11,6 @@ function Home() {
     const [apiData, setApiData] = useState(null)
     const [apiDataError, setApiDataError] = useState(null)
    
-
-    
-
-
     const onSearch = async function({q, optionChange}){
        
         
@@ -44,18 +40,18 @@ function Home() {
         }
         if(apiData){
         return apiData[0].show 
-            ? <ShowGrid show={apiData}/>
+            ? <ShowGrid shows={apiData}/>
             : <ActorGrid actor ={apiData} />
         }
         return null;     
     }
   return (
-    <div>
+    <div >
         <SearchForm onSearch={onSearch}/>
 
         <div>
         {onrender()}
-    </div>
+        </div>
        
     </div>
   )

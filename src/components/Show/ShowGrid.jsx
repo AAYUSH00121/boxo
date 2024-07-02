@@ -1,9 +1,10 @@
 
 import { useStarredShows } from "../../lib/useStarredShows"
 import ShowCard from "./ShowCard"
+import styled from "styled-components"
 
 
-function ShowGrid({show}){
+function ShowGrid({shows}){
  const [starredShows, dispatchStarred] = useStarredShows()
     const onStarMeClick = (showId) => {
         const isStarred = starredShows.includes(showId)
@@ -16,8 +17,9 @@ function ShowGrid({show}){
 
     }
     return (
-        <div>
-        {show.map((data)=>
+        <FlexGrid>
+           
+        {shows.map((data)=>
             <ShowCard 
               key={data.show.id} 
               id={data.show.id}
@@ -27,9 +29,27 @@ function ShowGrid({show}){
               onStarMeClick={onStarMeClick}
               isStarred={ starredShows.includes(data.show.id)}
             />)}
-       </div>  
+          
+       </FlexGrid>  
     )
 
 }
 
 export default ShowGrid
+
+export const FlexGrid = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  animation: fadein 0.3s ease-in forwards;
+
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;

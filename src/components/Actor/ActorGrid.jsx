@@ -1,7 +1,8 @@
+import { FlexGrid } from "../Show/ShowGrid"
 import ActorCard from "./ActorCard"
 function ActorGrid({actor}){
     return (
-        <div>
+        <FlexGrid>
         {actor.map((data)=>
             <ActorCard
               key={data.person.id} 
@@ -12,7 +13,7 @@ function ActorGrid({actor}){
               deathday = {data.person.deathday}
               gender= {data.person.gender}
             />)}
-       </div>   
+       </FlexGrid>   
     )
 
 }
